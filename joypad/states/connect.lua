@@ -8,6 +8,7 @@ function connect.load()
 	connectButton:setImage('assets/img/button.png')
 	connectButton:setFont()
 	connectButton:setCallback(function()
+		lk.setTextInput(false)
 		SM.go('joypad', {
 			address = ipInput:getText() or '192.168.137.1',
 			nickname = nickInput:getText()  or 'abacate'

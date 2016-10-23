@@ -1,11 +1,13 @@
 -- global variables to store love modules --
 lg = love.graphics
 la = love.audio
+lk = love.keyboard
 
 -- state machine --
 SM = require 'state-machine'
 
 function love.load()
+	
 	SM.add('connect', 'states.connect', true)
 	SM.add( 'joypad', 'states.joypad')
 end

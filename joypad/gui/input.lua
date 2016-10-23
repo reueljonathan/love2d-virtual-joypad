@@ -1,7 +1,6 @@
 local Input = {}
 
 	local lg = love.graphics
-	local Keyboard = require 'gui.keyboard'
 
 	function Input:new(x, y, width, height)
 		local i = {}
@@ -12,12 +11,10 @@ local Input = {}
 		i.y = y
 		i.width = width
 		i.height = height
-		i.keyboard = Keyboard:new(i)
 		return i
 	end
 
 	function Input:resize(w, h)
-		self.keyboard:resize(w, h)
 	end
 
 	function Input:keypressed(key)
@@ -34,15 +31,15 @@ local Input = {}
 
 	function Input:mousepressed(x, y, btn, isTouch)
 		if self.focus then
-			self.keyboard:mousepressed(x, y)
 		end
 	end
 
 	function Input:mousereleased(x, y)
-		if (not self.focus and self.keyboard:pressed(y)) or (x > self.x and x < self.x + self.width and 
-			y > self.y and y < self.y + self.height) then
+		if not self.focus and x > self.x and x < self.x + self.width and 
+			y > self.y and y < self.y + self.height then
 
 			self.focus = true
+			love.keyboard.setTextInput(true)
 		else
 			self.focus = false
 		end
@@ -51,7 +48,6 @@ local Input = {}
 	function Input:draw()
 		if self.focus then
 			lg.setColor(255, 255, 255)
-			self.keyboard:draw()
 		else
 			lg.setColor(100,100,100)
 		end
